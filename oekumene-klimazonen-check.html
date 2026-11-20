@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Selbsttest Ökumene und Landschaftszonen</title>
+<style>
+:root{--bg:#f5f8f4;--card:#fff;--ink:#1d2b26;--muted:#4d625a;--pine:#163a2f;--teal:#1f6b55;--gold:#f2b84b;--tint:#e9f1ec;--line:#c8d9cf;--good:#2f7d32;--bad:#b5543c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1b17;--card:#172a23;--ink:#e9f2ee;--muted:#a9bfb6;--pine:#163a2f;--teal:#3aa282;--gold:#f6c766;--tint:#1d352c;--line:#2d493d;--good:#7bd07f;--bad:#f08a72}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Calibri,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;font-size:18px;line-height:1.45}
+header{background:var(--pine);color:#fff}
+.bar{max-width:860px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.bar h1{font-family:Cambria,Georgia,serif;font-size:20px;margin:0;flex:1}
+main{max-width:860px;margin:0 auto;padding:18px 16px 60px}
+.hero{background:var(--pine);color:#fff;border-radius:18px;padding:22px;margin-bottom:18px}
+.hero .k{color:var(--gold);font-weight:700;letter-spacing:.12em;font-size:13px}
+.hero h2{font-family:Cambria,Georgia,serif;font-size:29px;margin:6px 0 8px;line-height:1.15}
+.hero p{margin:0;color:#dcebe3}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.lv{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.lv.done{background:var(--tint)}
+.lv .no{display:inline-flex;width:40px;height:40px;border-radius:50%;background:var(--teal);color:#fff;align-items:center;justify-content:center;font-weight:700;font-size:20px;margin-bottom:8px}
+.lv h3{margin:0 0 4px;font-family:Cambria,Georgia,serif;font-size:21px;color:var(--pine)}
+.lv p{margin:0;color:var(--muted);font-size:16px}
+.lv .st{margin-top:8px;font-size:20px;letter-spacing:2px}
+@media (prefers-color-scheme:dark){h2.t,.lv h3{color:#cfe8dc}}
+h2.t{font-family:Cambria,Georgia,serif;color:var(--pine);margin:0 0 6px;font-size:26px}
+.story{color:var(--muted);margin:0 0 14px}
+.btn{font:inherit;font-weight:700;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;background:var(--teal);color:#fff;min-height:48px}
+.btn.alt{background:var(--gold);color:#1d2b26}
+.btn.ghost{background:var(--tint);color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn:focus-visible,select:focus-visible,.lv:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.row label{flex:1 1 280px}
+select{font:inherit;padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);min-height:46px;flex:1 1 220px;max-width:100%}
+.ok{border-color:var(--good)!important}.no-{border-color:var(--bad)!important}
+.msg{margin-top:12px;font-weight:700;min-height:1.4em}.msg.good{color:var(--good)}.msg.bad{color:var(--bad)}
+.hint{background:var(--tint);border-radius:12px;padding:12px 14px;margin-top:12px;border:1px solid var(--line)}
+.task{font-size:19px;font-weight:700;background:var(--tint);border-radius:12px;padding:12px 14px;margin:0 0 12px}
+.hidden{display:none!important}
+.row2{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.sub{border-top:2px dashed var(--line);margin-top:18px;padding-top:14px}
+.sub h3{margin:0 0 6px;font-family:Cambria,Georgia,serif;color:var(--pine)}
+@media (prefers-color-scheme:dark){.sub h3{color:#cfe8dc}}
+svg.cd{display:block;width:100%;max-width:520px;height:auto;margin:0 auto 6px;background:var(--card);border-radius:8px}
+svg.cd text{fill:var(--ink);font-family:Calibri,"Segoe UI",system-ui,sans-serif}
+.tf{display:flex;gap:8px;margin-top:6px}
+textarea{width:100%;min-height:110px;font:inherit;padding:10px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:8px 0}
+.ck input{width:24px;height:24px;margin-top:2px;flex:none}
+.globewrap{max-width:460px;margin:0 auto}
+.globewrap canvas{display:block;width:100%;aspect-ratio:1/1;touch-action:none;cursor:grab;border-radius:50%}
+.ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.btn.sm{padding:8px 12px;min-height:44px;min-width:48px}
+.small{font-size:15px;color:var(--muted)}
+.win{text-align:center}.big{font-size:54px;line-height:1}
+</style>
+</head>
+<body>
+<header><div class="bar"><h1>🌍 Selbsttest Erdkunde EF</h1><div id="total" aria-label="Sterne gesamt"></div></div></header>
+<main id="app"></main>
+<script>
+(function(){
+"use strict";
+var KEY="oekumene-klimazonen-v1", state={done:{}};
+try{var s=localStorage.getItem(KEY);if(s){var o=JSON.parse(s);if(o&&o.done)state=o;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+var app=document.getElementById("app");
+function el(t,a,h){var e=document.createElement(t);if(a)for(var k in a){if(k==="class")e.className=a[k];else e.setAttribute(k,a[k]);}if(h!=null)e.innerHTML=h;return e;}
+function NS(t,a){var e=document.createElementNS("http://www.w3.org/2000/svg",t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function starStr(n){var s="";for(var i=0;i<3;i++)s+=i<n?"★":"☆";return s;}
+function starsFor(e){return e===0?3:(e<=2?2:1);}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function totalStars(){var t=0;for(var k in state.done)t+=state.done[k];return t;}
+function updTotal(){document.getElementById("total").textContent="★ "+totalStars()+" / "+(levels.length*3);}
+
+function selectTask(box,items,btnLabel,okText,onDone,onError){
+  var sels=[];
+  items.forEach(function(q){
+    var row=el("div",{class:"row"});row.appendChild(el("label",null,q[0]));
+    var s=el("select",{"aria-label":q[0]});s.appendChild(el("option",{value:0},"– bitte wählen –"));
+    q[1].forEach(function(o,k){s.appendChild(el("option",{value:k+1},o));});
+    row.appendChild(s);box.appendChild(row);sels.push(s);
+  });
+  var msg=el("div",{class:"msg"});var b=el("button",{class:"btn"},btnLabel);
+  b.onclick=function(){
+    var all=true;
+    sels.forEach(function(s,i){var ok=(+s.value===items[i][2]+1);s.classList.toggle("ok",ok);s.classList.toggle("no-",!ok);if(!ok)all=false;});
+    if(all){msg.className="msg good";msg.textContent=okText;b.disabled=true;sels.forEach(function(s){s.disabled=true;});onDone();}
+    else{msg.className="msg bad";msg.textContent="Noch nicht alles richtig. Rot markierte Felder prüfen.";onError();}
+  };
+  box.appendChild(b);box.appendChild(msg);
+}
+
+// ---- Klimadiagramme (typisch, vereinfacht; keine realen Messstationen) ----
+var CLIM=[
+ {zone:"Tropischer Regenwald",T:[26,26,27,27,27,26,26,26,26,27,27,26],N:[250,250,280,280,260,180,150,120,150,200,230,260]},
+ {zone:"Savanne",T:[25,26,27,27,26,24,23,24,26,27,26,25],N:[200,180,150,70,15,5,0,0,10,60,130,190]},
+ {zone:"Wüste",T:[14,16,20,25,30,34,35,35,32,27,20,15],N:[2,2,2,1,0,0,0,0,0,1,2,2]},
+ {zone:"Mittelmeerraum (Hartlaubzone)",T:[10,11,13,16,20,24,27,27,24,20,15,11],N:[70,60,55,45,30,15,5,10,40,70,85,80]},
+ {zone:"Gemäßigte Zone (Laub- und Mischwald)",T:[0,1,5,9,14,17,19,18,14,9,4,1],N:[50,45,50,50,65,75,80,75,60,55,60,55]},
+ {zone:"Boreale Zone (Taiga)",T:[-18,-15,-7,2,10,16,19,16,9,1,-9,-16],N:[20,15,15,20,35,55,70,60,45,35,25,20]},
+ {zone:"Polare Zone (Tundra)",T:[-26,-26,-23,-16,-4,3,7,5,-1,-10,-19,-24],N:[15,12,12,12,15,25,35,35,25,20,15,15]}
+];
+function sum(a){return a.reduce(function(x,y){return x+y;},0);}
+function drawCD(c){
+  var W=520,H=340,L=52,R=52,Tp=26,B=44,w=W-L-R,h=H-Tp-B;
+  var svg=NS("svg",{class:"cd",viewBox:"0 0 "+W+" "+H,role:"img","aria-label":"Klimadiagramm"});
+  var Tmin=-30,Tmax=70;
+  function y(te){return Tp+h*(1-(te-Tmin)/(Tmax-Tmin));}
+  function x(m){return L+w*(m+0.5)/12;}
+  function te(n){return n<=100?n/2:50+(n-100)/20;} // 100 mm = 50°C-Skala; darüber 1:10 gestaucht
+  // Achsen
+  for(var t=-30;t<=40;t+=10){svg.appendChild(NS("line",{x1:L,x2:W-R,y1:y(t),y2:y(t),stroke:"#9fb4a9","stroke-width":t===0?1.6:0.5}));var tx=NS("text",{x:L-6,y:y(t)+4,"text-anchor":"end","font-size":12});tx.textContent=t;svg.appendChild(tx);}
+  [0,20,40,60,80,100].forEach(function(n){var tn=NS("text",{x:W-R+6,y:y(n/2)+4,"font-size":12});tn.textContent=n;svg.appendChild(tn);});
+  var tn2=NS("text",{x:W-R+6,y:y(55)+4,"font-size":12});tn2.textContent="300";svg.appendChild(tn2);
+  var l1=NS("text",{x:L-6,y:Tp-10,"text-anchor":"end","font-size":12,"font-weight":"700"});l1.textContent="°C";svg.appendChild(l1);
+  var l2=NS("text",{x:W-R+6,y:Tp-10,"font-size":12,"font-weight":"700"});l2.textContent="mm";svg.appendChild(l2);
+  "JFMAMJJASOND".split("").forEach(function(m,i){var q=NS("text",{x:x(i),y:H-B+16,"text-anchor":"middle","font-size":13});q.textContent=m;svg.appendChild(q);});
+  // Flächen: humid (N über T) blau, arid (T über N) rot-schraffiert/orange
+  var ptsT=[],ptsN=[];
+  for(var i=0;i<12;i++){ptsT.push([x(i),y(Math.max(Tmin,c.T[i]))]);ptsN.push([x(i),y(te(Math.min(300,c.N[i])))]);}
+  // humid Fläche (zwischen T-Kurve und N-Kurve, wo N>T-eq)
+  var hum="",ar="";
+  for(var j=0;j<12;j++){
+    var tt=c.T[j]>=0?c.T[j]:-100; // unter 0°C: Temperaturlinie wird nicht als Trockenheitsgrenze verwendet
+    var nT=te(Math.min(300,c.N[j]));
+    if(nT>=c.T[j] && c.T[j]>0){svg.appendChild(NS("rect",{x:x(j)-w/24,y:y(nT),width:w/12,height:Math.max(0,y(c.T[j])-y(nT)),fill:"#4a90c2","fill-opacity":0.55}));}
+    else if(nT<c.T[j]){svg.appendChild(NS("rect",{x:x(j)-w/24,y:y(c.T[j]),width:w/12,height:Math.max(0,y(nT)-y(c.T[j]))*-1<0?0:0,fill:"none"}));
+      svg.appendChild(NS("rect",{x:x(j)-w/24,y:y(c.T[j]),width:w/12,height:Math.max(0,y(nT)-y(c.T[j])),fill:"#e0a030","fill-opacity":0.5}));}
+    if(nT>=50&&c.N[j]>=100){svg.appendChild(NS("rect",{x:x(j)-w/24,y:y(te(Math.min(300,c.N[j]))),width:w/12,height:Math.max(0,y(50)-y(te(Math.min(300,c.N[j])))),fill:"#1f5f99","fill-opacity":0.6}));}
+  }
+  function path(p,col){var d="M"+p.map(function(q){return q[0].toFixed(1)+","+q[1].toFixed(1);}).join(" L");svg.appendChild(NS("path",{d:d,fill:"none",stroke:col,"stroke-width":3,"stroke-linejoin":"round"}));}
+  path(ptsN,"#1f5f99");path(ptsT,"#c8322b");
+  var lg=NS("text",{x:L,y:H-4,"font-size":12});lg.textContent="rot: Temperatur · blau: Niederschlag";svg.appendChild(lg);
+  return svg;
+}
+
+  function fmtLat(v){return Math.abs(v)+"° "+(v>=0?"N":"S");}
+  function fmtLon(v){return Math.abs(v)+"° "+(v>=0?"O":"W");}
+  function coord(lat,lon){return fmtLat(lat)+", "+fmtLon(lon);}
+  // ---------- Küsten (stark vereinfacht, [Länge, Breite]) ----------
+  var LAND=[
+    [[-17,21],[-16,14],[-17,12],[-13,8],[-8,4.5],[-4,5],[2,6],[5,4.5],[9,4],[9,0],[12,-5],[13,-12],[12,-17],[15,-27],[18,-33],[20,-35],[26,-34],[32,-28],[35,-24],[35,-20],[40,-15],[40,-10],[39,-5],[42,0],[51,11],[43,12],[38,18],[35,25],[33,30],[25,32],[20,31],[11,33],[10,37],[0,36],[-6,35],[-10,30],[-13,27]],
+    [[-6,36],[-9,37],[-9,43],[-2,43.5],[-1,46],[-4.5,48],[1.5,51],[4,52],[8,54],[8.5,57],[10.5,57.5],[8,58],[5,60],[5,62],[10,64],[14,67],[20,70],[26,71],[32,70],[40,67],[44,66],[53,68],[60,69],[68,69],[73,73],[80,73],[88,75],[100,77],[108,76],[113,74],[125,73],[140,72],[150,71],[160,70],[170,70],[180,69],[180,65],[175,64],[170,60],[163,58],[160,54],[156,51],[156,57],[150,59],[143,59],[138,55],[141,52],[140,48],[135,43],[130,42],[129,36],[126,35],[126,38],[125,40],[121,40],[121,37],[120,34],[122,30],[120,25],[116,23],[110,21],[106,20],[108,15],[109,11],[105,9],[104,10],[100,13],[99,9],[101,3],[104,1.5],[100,6],[98,10],[98,16],[95,16],[94,20],[90,22],[87,21],[80,15],[80,10],[77,8],[73,17],[72,21],[68,23],[67,25],[62,25],[57,26],[56,27],[52,28],[49,30],[48,29],[50,25],[52,24],[56,26],[58,23],[59,22],[55,17],[52,16],[45,13],[43,13],[42,16],[39,21],[35,28],[34,31],[35,33],[36,36],[30,36],[27,37],[26,40],[23,40],[24,38],[21,37],[19,40],[19,42],[14,45],[12,45],[16,41],[18,40],[16,38],[12,41],[9,44],[5,43],[3,43],[0,39],[-1,37],[-5,36.5]],
+    [[-168,65],[-163,70],[-155,71],[-140,70],[-125,70],[-110,68],[-95,72],[-90,69],[-82,68],[-80,63],[-93,60],[-95,57],[-88,56],[-82,53],[-79,55],[-77,60],[-70,60],[-65,58],[-60,55],[-56,52],[-64,49],[-66,45],[-70,43],[-70,41],[-74,40],[-76,35],[-81,31],[-80,26],[-82,26],[-84,30],[-89,30],[-94,29],[-97,26],[-97,22],[-95,19],[-91,19],[-90,21],[-87,21],[-88,16],[-84,15],[-83,10],[-79,9],[-77,8],[-80,7],[-84,9],[-87,13],[-92,15],[-96,16],[-105,20],[-109,26],[-113,31],[-115,30],[-117,33],[-121,35],[-124,40],[-124,46],[-125,49],[-130,54],[-134,58],[-140,60],[-148,60],[-152,58],[-158,57],[-163,55],[-158,59],[-162,62],[-166,62],[-165,64]],
+    [[-73,78],[-60,82],[-30,83],[-20,80],[-18,75],[-22,70],[-32,68],[-42,60],[-48,61],[-53,67],[-55,71],[-60,76]],
+    [[-77,8],[-72,12],[-62,10.5],[-52,5],[-50,0],[-45,-2],[-35,-5],[-37,-12],[-39,-18],[-41,-22],[-48,-26],[-49,-29],[-53,-34],[-58,-35],[-57,-38],[-62,-39],[-65,-42],[-66,-47],[-69,-51],[-68,-54],[-73,-52],[-75,-47],[-73,-40],[-72,-33],[-70,-18],[-76,-14],[-81,-6],[-80,-2],[-77,3]],
+    [[114,-22],[114,-26],[115,-34],[118,-35],[124,-33],[131,-31.5],[135,-35],[138,-35],[141,-38],[147,-39],[150,-37],[153,-30],[153,-25],[146,-19],[142,-11],[141,-17],[136,-12],[130,-11],[126,-14],[122,-18]],
+    [[-180,-78],[-150,-76],[-120,-74],[-90,-72],[-60,-65],[-62,-72],[-45,-78],[-20,-72],[0,-70],[30,-69],[60,-67],[90,-66],[120,-66],[150,-70],[165,-77],[180,-78],[180,-90],[-180,-90]],
+    [[-5,50],[1,51],[2,53],[-2,56],[-2,58],[-5,58.5],[-6,56],[-3,54],[-5,52]],
+    [[130,31],[133,34],[140,35],[142,40],[140,41],[139,38],[135,36],[131,34]],
+    [[44,-25],[47,-25],[50,-15],[49,-12],[46,-15],[43,-21]],
+    [[109,1],[117,7],[119,1],[116,-4],[110,-3]],
+    [[95,5],[98,4],[106,-3],[105,-6],[101,-2]],
+    [[-24,65],[-14,66],[-14,64],[-20,63]]
+  ];
+  function densify(poly){
+    var out=[];
+    for(var i=0;i<poly.length;i++){
+      var a=poly[i], b=poly[(i+1)%poly.length];
+      var n=Math.max(1,Math.ceil(Math.max(Math.abs(b[0]-a[0]),Math.abs(b[1]-a[1]))/3));
+      for(var k=0;k<n;k++){ out.push([a[0]+(b[0]-a[0])*k/n, a[1]+(b[1]-a[1])*k/n]); }
+    }
+    return out;
+  }
+  var LANDD=LAND.map(densify);
+
+  // ---------- Globus ----------
+  var D=Math.PI/180;
+  var globes=[];
+  function dark(){ return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
+  function Globe(opts){
+    var g={view:{lat:20,lon:10},markers:[],axis:false,labels:true,pick:null,onPick:null,showPick:true};
+    var wrap=el("div",{class:"globewrap"});
+    var cv=el("canvas",{"aria-label":"Drehbarer Globus","role":"img"});
+    wrap.appendChild(cv);
+    var ctrl=el("div",{class:"ctrl"});
+    function mk(txt,label,fn){ var b=el("button",{class:"btn ghost sm",type:"button","aria-label":label},txt); b.onclick=fn; ctrl.appendChild(b); return b; }
+    mk("◀","nach links drehen",function(){ g.view.lon-=15; g.render(); });
+    mk("▲","nach oben kippen",function(){ g.view.lat=Math.min(90,g.view.lat+15); g.render(); });
+    mk("▼","nach unten kippen",function(){ g.view.lat=Math.max(-90,g.view.lat-15); g.render(); });
+    mk("▶","nach rechts drehen",function(){ g.view.lon+=15; g.render(); });
+    mk("⟲","Ansicht zurücksetzen",function(){ g.view={lat:20,lon:10}; g.render(); });
+    wrap.appendChild(ctrl);
+    wrap.appendChild(el("div",{class:"small",style:"text-align:center;margin-top:6px"},"Zum Drehen mit dem Finger über die Kugel wischen."));
+    g.el=wrap; g.canvas=cv;
+    var size=0,R=0,cx=0,cy=0;
+    function proj(lat,lon){
+      var p=lat*D,l=(lon-g.view.lon)*D,p0=g.view.lat*D;
+      var c=Math.sin(p0)*Math.sin(p)+Math.cos(p0)*Math.cos(p)*Math.cos(l);
+      var x=Math.cos(p)*Math.sin(l), y=Math.cos(p0)*Math.sin(p)-Math.sin(p0)*Math.cos(p)*Math.cos(l);
+      return {x:cx+R*x,y:cy-R*y,c:c};
+    }
+    function inverse(px,py){
+      var nx=(px-cx)/R, ny=(cy-py)/R, rho=Math.sqrt(nx*nx+ny*ny);
+      if(rho>1) return null;
+      var p0=g.view.lat*D, l0=g.view.lon*D;
+      if(rho<1e-9) return {lat:g.view.lat,lon:g.view.lon};
+      var c=Math.asin(rho);
+      var lat=Math.asin(Math.cos(c)*Math.sin(p0)+ny*Math.sin(c)*Math.cos(p0)/rho);
+      var lon=l0+Math.atan2(nx*Math.sin(c),rho*Math.cos(p0)*Math.cos(c)-ny*Math.sin(p0)*Math.sin(c));
+      lat/=D; lon/=D; while(lon>180) lon-=360; while(lon<-180) lon+=360;
+      return {lat:lat,lon:lon};
+    }
+    g.centerOn=function(lat,lon){ g.view={lat:Math.max(-85,Math.min(85,lat)),lon:lon}; g.render(); };
+    g.render=function(){
+      var w=cv.clientWidth||320; var dpr=window.devicePixelRatio||1;
+      if(cv.width!==Math.round(w*dpr)){ cv.width=Math.round(w*dpr); cv.height=Math.round(w*dpr); }
+      var ctx=cv.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+      size=w; cx=w/2; cy=w/2; R=w*0.46;
+      var dk=dark();
+      var cs=getComputedStyle(document.documentElement);
+      var ink=cs.getPropertyValue("--ink").trim()||"#1b2a33";
+      var teal=cs.getPropertyValue("--teal").trim()||"#1d7874";
+      var orange=cs.getPropertyValue("--orange").trim()||"#f28f3b";
+      ctx.clearRect(0,0,w,w);
+      // Kugel
+      var gr=ctx.createRadialGradient(cx-R*0.3,cy-R*0.3,R*0.1,cx,cy,R);
+      gr.addColorStop(0,dk?"#2a6a8c":"#b6d9ec"); gr.addColorStop(1,dk?"#133b52":"#7fb4d3");
+      ctx.beginPath(); ctx.arc(cx,cy,R,0,2*Math.PI); ctx.fillStyle=gr; ctx.fill();
+      // Land
+      ctx.fillStyle=dk?"#4f7f5a":"#d3e0b0"; ctx.strokeStyle=dk?"#7fb08a":"#8fa66b"; ctx.lineWidth=1;
+      LANDD.forEach(function(poly){
+        var pts=poly.map(function(q){ return proj(q[1],q[0]); });
+        var any=pts.some(function(p){return p.c>0;}); if(!any) return;
+        ctx.beginPath();
+        pts.forEach(function(p,i){
+          var x=p.x,y=p.y;
+          if(p.c<0){ var dx=x-cx,dy=y-cy,r=Math.sqrt(dx*dx+dy*dy)||1; x=cx+dx/r*R; y=cy+dy/r*R; }
+          if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        });
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+      });
+      // Gradnetz
+      function line(pointsFn,from,to,step,color,width){
+        ctx.beginPath(); ctx.strokeStyle=color; ctx.lineWidth=width;
+        var pen=false;
+        for(var t=from;t<=to+1e-9;t+=step){
+          var p=pointsFn(t);
+          if(p.c>0){ if(!pen){ ctx.moveTo(p.x,p.y); pen=true; } else ctx.lineTo(p.x,p.y); } else pen=false;
+        }
+        ctx.stroke();
+      }
+      var thin=dk?"rgba(232,240,244,.22)":"rgba(11,60,93,.28)", bold=dk?"rgba(232,240,244,.55)":"rgba(11,60,93,.6)";
+      var lat,lon;
+      for(lat=-80;lat<=80;lat+=10){ if(lat===0) continue; (function(L){ line(function(t){return proj(L,t);},-180,180,3,(L%30===0)?bold:thin,(L%30===0)?1.6:1); })(lat); }
+      for(lon=-180;lon<180;lon+=10){ if(lon===0) continue; (function(L){ line(function(t){return proj(t,L);},-90,90,3,(L%30===0)?bold:thin,(L%30===0)?1.6:1); })(lon); }
+      line(function(t){return proj(0,t);},-180,180,2,teal,3.5);
+      line(function(t){return proj(t,0);},-90,90,2,orange,3.5);
+      // Umriss
+      ctx.beginPath(); ctx.arc(cx,cy,R,0,2*Math.PI); ctx.strokeStyle=bold; ctx.lineWidth=2; ctx.stroke();
+      // Erdachse
+      if(g.axis){
+        ctx.strokeStyle=dk?"#ffd27a":"#b5543c"; ctx.lineWidth=3; ctx.setLineDash([8,5]);
+        ctx.beginPath(); ctx.moveTo(cx,cy-R*1.12); ctx.lineTo(cx,cy+R*1.12); ctx.stroke(); ctx.setLineDash([]);
+      }
+      // Beschriftung der Gradzahlen
+      if(g.labels){
+        ctx.font="600 "+Math.max(11,Math.round(w*0.034))+"px Calibri, Segoe UI, sans-serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
+        function lab(text,p,color){ if(p.c<0.25) return; ctx.lineWidth=3; ctx.strokeStyle=dk?"#0e1b24":"#ffffff"; ctx.strokeText(text,p.x,p.y); ctx.fillStyle=color; ctx.fillText(text,p.x,p.y); }
+        for(lon=-150;lon<=180;lon+=30){ if(lon===0||lon===180) continue; lab(Math.abs(lon)+"°"+(lon>0?"O":"W"),proj(-5,lon),teal); }
+        lab("0°",proj(-5,0),teal); lab("180°",proj(-5,180),teal);
+        for(lat=-60;lat<=60;lat+=30){ if(lat===0) continue; lab(Math.abs(lat)+"°"+(lat>0?"N":"S"),proj(lat,6),orange); }
+      }
+      // Markierungen
+      g.markers.forEach(function(m){
+        var p=proj(m.lat,m.lon); if(p.c<=0) return;
+        ctx.beginPath(); ctx.arc(p.x,p.y,9,0,2*Math.PI); ctx.fillStyle="#f28f3b"; ctx.fill(); ctx.lineWidth=2.5; ctx.strokeStyle="#0b3c5d"; ctx.stroke();
+        ctx.font="700 "+Math.max(14,Math.round(w*0.045))+"px Calibri, Segoe UI, sans-serif"; ctx.textAlign="left"; ctx.textBaseline="bottom";
+        ctx.lineWidth=4; ctx.strokeStyle=dk?"#0e1b24":"#ffffff"; ctx.strokeText(m.label,p.x+11,p.y-8); ctx.fillStyle=ink; ctx.fillText(m.label,p.x+11,p.y-8);
+      });
+      if(g.pick){
+        var q=proj(g.pick.lat,g.pick.lon);
+        if(q.c>0){ ctx.strokeStyle="#c8322b"; ctx.lineWidth=3.5; ctx.beginPath(); ctx.arc(q.x,q.y,9,0,2*Math.PI); ctx.moveTo(q.x-15,q.y); ctx.lineTo(q.x+15,q.y); ctx.moveTo(q.x,q.y-15); ctx.lineTo(q.x,q.y+15); ctx.stroke(); }
+      }
+    };
+    // Eingaben (Ziehen = drehen, Tippen = wählen)
+    var down=null;
+    cv.addEventListener("pointerdown",function(e){ down={x:e.clientX,y:e.clientY,lx:e.clientX,ly:e.clientY,moved:false}; try{ cv.setPointerCapture(e.pointerId); }catch(_){} });
+    cv.addEventListener("pointermove",function(e){
+      if(!down) return;
+      var dx=e.clientX-down.lx, dy=e.clientY-down.ly;
+      if(!down.moved && Math.hypot(e.clientX-down.x,e.clientY-down.y)>6) down.moved=true;
+      if(down.moved){
+        var k=180/(Math.PI*R);
+        g.view.lon-=dx*k; g.view.lat=Math.max(-90,Math.min(90,g.view.lat+dy*k));
+        while(g.view.lon>180) g.view.lon-=360; while(g.view.lon<-180) g.view.lon+=360;
+        g.render();
+      }
+      down.lx=e.clientX; down.ly=e.clientY;
+    });
+    function up(e){
+      if(!down) return; var d=down; down=null;
+      if(d.moved) return;
+      var r=cv.getBoundingClientRect();
+      var s=cv.width/(window.devicePixelRatio||1)/r.width;
+      var pt=inverse((e.clientX-r.left)*s,(e.clientY-r.top)*s);
+      if(!pt) return;
+      if(g.onPick) g.onPick(pt);
+    }
+    cv.addEventListener("pointerup",up);
+    cv.addEventListener("pointercancel",function(){ down=null; });
+    globes.push(g);
+    return g;
+  }
+  window.addEventListener("resize",function(){ globes.forEach(function(g){ g.render(); }); });
+  if(window.matchMedia){ try{ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){ globes.forEach(function(g){ g.render(); }); }); }catch(_){} }
+
+
+// ---- Level ----
+var levels=[
+ {title:"Begriffe Ökumene",teaser:"Ökumene, Anökumene, Subökumene und die drei Grenzen.",hint:"Ökumene = dauerhaft bewohnter Raum. Anökumene = nicht dauerhaft bewohnter Raum. Grenzen: zu kalt (Kältegrenze), zu trocken (Trockengrenze), zu hoch (Höhengrenze).",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"Ordne die Beschreibungen den richtigen Fachbegriffen zu."));
+   var o=["Ökumene","Anökumene","Subökumene","Kältegrenze","Trockengrenze","Höhengrenze","Siedlungsgrenze"];
+   selectTask(b,[
+    ["Der dauerhaft von Menschen bewohnte Teil der Erde",o,0],
+    ["Der nicht dauerhaft bewohnte Teil der Erde",o,1],
+    ["Randbereich, nur zeitweise oder sehr dünn besiedelt, zum Beispiel Weideland von Nomaden",o,2],
+    ["Mit Annäherung an die Pole lässt die Wärme für Landwirtschaft und Siedlung nach",o,3],
+    ["Zu wenig Wasser für Regenfeldbau, Siedlungen nur an Oasen oder mit Bewässerung",o,4],
+    ["Im Hochgebirge wird es mit zunehmender Höhe kälter, die Luft dünner und die Vegetationszeit kürzer",o,5],
+    ["Oberbegriff für die Linie, an der dauerhafte Besiedlung endet",o,6]
+   ],"Zuordnung prüfen","Alle Begriffe sitzen!",c.done,c.error);
+  }},
+ {title:"Landschaftszonen",teaser:"Vegetation und Klima richtig zuordnen.",hint:"Achte auf die Schlüsselwörter: Dauerfrostboden, Hartlaub, Regenzeit/Trockenzeit, Nadelwald, Laubwald, Schwarzerde.",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"Welche Zone beziehungsweise Vegetation passt zur Beschreibung?"));
+   var o=["Tropischer Regenwald","Savanne","Wüste","Hartlaubzone (Mittelmeerraum)","Gemäßigte Zone (Laub- und Mischwald)","Steppe","Boreale Zone (Taiga, Nadelwald)","Tundra"];
+   selectTask(b,[
+    ["Ganzjährig hohe Temperaturen und Niederschläge, immergrüner, mehrschichtiger Wald",o,0],
+    ["Regenzeit und Trockenzeit wechseln, Grasland mit einzelnen Bäumen",o,1],
+    ["Extrem wenig Niederschlag, kaum Pflanzenwuchs",o,2],
+    ["Trockene, heiße Sommer und milde, feuchte Winter, Korkeiche und Olive",o,3],
+    ["Vier Jahreszeiten, sommergrüne Laubbäume",o,4],
+    ["Zu trocken für Wald, Gräser, fruchtbare Schwarzerde, zum Beispiel Ukraine und Prärie",o,5],
+    ["Lange, sehr kalte Winter, immergrüne Nadelbäume, Dauerfrostboden stellenweise",o,6],
+    ["Baumlos, Moose, Flechten, Zwergsträucher, Dauerfrostboden",o,7]
+   ],"Zuordnung prüfen","Super, die Zonen sitzen!",c.done,c.error);
+  }},
+ {title:"Klimadiagramme lesen",teaser:"Vier Diagramme: Zone, Niederschlag, Grenze.",hint:"Jahresniederschlag = Summe der 12 Monatswerte. Liegt die blaue Niederschlagslinie über der roten Temperaturlinie, ist es humid, liegt sie darunter, arid. Die Diagramme sind typisierte Beispiele, keine realen Stationen.",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"Skala: 10 °C entsprechen 20 mm Niederschlag. Über 100 mm ist die Skala gestaucht. Die Diagramme sind typisiert und nicht an eine Station gebunden."));
+   var picks=shuffle(CLIM.slice()).slice(0,4);var names=CLIM.map(function(z){return z.zone;});
+   picks.forEach(function(p,i){
+    var sec=el("div",{class:i?"sub":""});sec.appendChild(el("h3",null,"Diagramm "+(i+1)));sec.appendChild(drawCD(p));
+    var N=Math.round(sum(p.N)),T=Math.round(sum(p.T)/12*10)/10;
+    var items=[["Zu welcher Zone gehört das Diagramm?",names,names.indexOf(p.zone)]];
+    var r10=function(v){return Math.max(10,Math.round(v/10)*10);};
+    var vals=p.zone==="Wüste"?[10,150,600]:[r10(N),r10(N/3),r10(N*2.5)];
+    var no=shuffle(vals.map(function(v){return "etwa "+v+" mm";}));
+    var correct=no.indexOf("etwa "+vals[0]+" mm");
+    items.push(["Welcher Jahresniederschlag passt ungefähr?",no,correct]);
+    var tt=T>=22?"hoch (über 20 °C)":(T>=8?"mittel (8 bis 20 °C)":"niedrig (unter 8 °C)");
+    items.push(["Wie ist die Jahresmitteltemperatur?",["niedrig (unter 8 °C)","mittel (8 bis 20 °C)","hoch (über 20 °C)"],T>=20?2:(T>=8?1:0)]);
+    if(p.zone==="Wüste")items.push(["Welche Grenze der Ökumene steht hier im Vordergrund?",["Kältegrenze","Trockengrenze","Höhengrenze"],1]);
+    if(p.zone==="Polare Zone (Tundra)")items.push(["Welche Grenze der Ökumene steht hier im Vordergrund?",["Kältegrenze","Trockengrenze","Höhengrenze"],0]);
+    var box=el("div");sec.appendChild(box);b.appendChild(sec);
+    var cnt=picks.length;
+    selectTask(box,items,"Diagramm "+(i+1)+" prüfen","Passt!",function(){picks._d=(picks._d||0)+1;if(picks._d===cnt)c.done();},c.error);
+   });
+  }},
+ {title:"Grenzen und Ursachen",teaser:"Richtig oder falsch? Dazu Beispiele.",hint:"Die Zonen entstehen, weil die Sonneneinstrahlung vom Äquator zu den Polen abnimmt (Kugelgestalt der Erde). Jahreszeiten entstehen durch die 23,5° geneigte Erdachse. Tageszeitenklima: Tropen. Jahreszeitenklima: höhere Breiten.",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"Entscheide für jede Aussage."));
+   var tf=["richtig","falsch"];
+   selectTask(b,[
+    ["Die Anökumene ist komplett unbewohnt, es gibt dort nie Menschen.",tf,1],
+    ["Auch heiße Wüsten und Polargebiete gehören überwiegend zur Anökumene.",tf,0],
+    ["Die Grenzen der Ökumene sind unveränderlich, Technik (Bewässerung, Heizung) kann sie nicht verschieben.",tf,1],
+    ["Die Zonen verlaufen ungefähr parallel zu den Breitenkreisen, weil die Einstrahlung mit der Breite abnimmt.",tf,0],
+    ["Die Jahreszeiten entstehen, weil die Erde im Sommer der Sonne näher ist.",tf,1],
+    ["Die Neigung der Erdachse von 23,5° ist Ursache der Jahreszeiten.",tf,0],
+    ["In den Tropen gibt es ein ausgeprägtes Jahreszeitenklima mit kalten Wintern.",tf,1],
+    ["Die Tropen haben ein Tageszeitenklima: Die Temperaturunterschiede im Tagesverlauf sind größer als die im Jahresverlauf.",tf,0],
+    ["Wegen der Höhenstufung kann man auch in den Tropen im Hochgebirge Schnee finden.",tf,0]
+   ],"Aussagen prüfen","Sehr gut!",c.done,c.error);
+  }}
+ ,{title:"Lokalisieren: Sacramento",teaser:"Gradnetz am Beispiel des Mandelanbaus.",hint:"Sacramento liegt bei etwa 38°31′ N und 121°30′ W, also rund 38,5° N und 121,5° W. Ein Breitengrad entspricht etwa 111 km. Der nördliche Wendekreis liegt bei 23,5° N.",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"Im Klimadiagramm von Sacramento (USA) stehen die Koordinaten <b>38°31′ N / 121°30′ W</b> und die Höhe 8 m ü. M. Lokalisiere die Stadt mit Hilfe des Gradnetzes."));
+   selectTask(b,[
+    ["Auf welcher Halbkugel (Nord/Süd) liegt Sacramento?",["Nordhalbkugel","Südhalbkugel"],0],
+    ["Auf welcher Halbkugel (Ost/West) liegt Sacramento?",["Östliche Länge, östlich des Nullmeridians","Westliche Länge, westlich des Nullmeridians"],1],
+    ["Zwischen welchen Breitenkreisen (Vielfache von 10°) liegt die Stadt?",["20° N und 30° N","30° N und 40° N","40° N und 50° N"],1],
+    ["Welchem Wert entsprechen die Koordinaten gerundet auf ganze Grad ungefähr?",["39° N, 122° W","38° S, 122° O","38° N, 121° O"],0],
+    ["Zu welchem Breitenbereich gehört Sacramento? (Wendekreis 23,5° N, Polarkreis 66,5° N)",["Tropen (zwischen den Wendekreisen)","Gemäßigte Breiten und Subtropen (zwischen Wendekreis und Polarkreis)","Polarzone (nördlich des Polarkreises)"],1],
+    ["Wie viele Breitengrade liegen zwischen Sacramento und dem nördlichen Wendekreis (23,5° N)?",["etwa 5 Breitengrade","etwa 15 Breitengrade","etwa 38 Breitengrade"],1],
+    ["Wie weit ist Sacramento vom Wendekreis ungefähr entfernt (1 Breitengrad etwa 111 km, Luftlinie nach Süden)?",["etwa 550 km","etwa 1 700 km","etwa 4 300 km"],1],
+    ["Wie weit ist Sacramento ungefähr vom Äquator entfernt?",["etwa 1 700 km","etwa 4 300 km","etwa 8 000 km"],1],
+    ["Die Stadt liegt auf etwa der gleichen Breite wie …",["Lissabon (Portugal)","Oslo (Norwegen)","Nairobi (Kenia)"],0],
+    ["Warum ist in Sacramento der Sommer heiß und trocken, der Winter mild und feucht?",["Wegen der Lage im Bereich der Subtropen: Im Sommer herrscht Hochdruckeinfluss, im Winter ziehen Tiefdruckgebiete mit Regen heran","Weil Sacramento direkt am Äquator liegt","Weil dort ganzjährig Polarluft einströmt"],0]
+   ],"Lokalisation prüfen","Sacramento sitzt! Lokalisieren kannst du jetzt für jede Stadt.",c.done,c.error);
+   b.appendChild(el("p",{class:"small",style:"margin-top:12px"},"Tipp: Mit dem Globus-Trainer kannst du die Koordinaten auch am drehbaren Globus üben."));
+  }}
+
+ ,{title:"Verorten am Globus",teaser:"Orte auf der drehbaren 3D-Erdkugel finden.",hint:"Dreh den Globus mit dem Finger oder den Pfeilen. Suche zuerst die richtige Halbkugel (Nord/Süd und Ost/West), dann den Breitenkreis und den Meridian. Dicke Linien sind 30° voneinander entfernt, dünne 10°. Etwa 6° Abweichung sind erlaubt.",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"Finde die Stationen aus den Klimadiagrammen und den Mandelanbau-Ort Sacramento auf dem Globus. Tippe auf die Kugel und bestätige dann. Der Äquator ist türkis, der Nullmeridian orange."));
+   var tasks=[["Sacramento (Kalifornien)",38.5,-121.5],["Athen (Griechenland)",38,24],["Essen (Deutschland)",51.5,7],["Walfischbucht (Namibia)",-23,14.5],["Padang (Indonesien)",-1,100],["Barrow (Alaska)",71,-157]];
+   var g=Globe();var idx=0,pick=null;
+   var title=el("div",{class:"task"});var info=el("div",{class:"small",style:"text-align:center;margin-top:8px"},"Noch nichts gewählt.");
+   var msg=el("div",{class:"msg"});var bt=el("button",{class:"btn",style:"margin-top:10px",disabled:"disabled"},"Bestätigen");
+   function setTask(){var t=tasks[idx];title.textContent="Aufgabe "+(idx+1)+" von "+tasks.length+": "+t[0]+" liegt bei etwa "+String(Math.abs(t[1])).replace(".",",")+"° "+(t[1]>=0?"N":"S")+", "+String(Math.abs(t[2])).replace(".",",")+"° "+(t[2]>=0?"O":"W");pick=null;g.pick=null;bt.disabled=true;info.textContent="Noch nichts gewählt.";g.render();}
+   g.onPick=function(p){pick=p;g.pick=p;bt.disabled=false;info.textContent="Gewählt: etwa "+coord(Math.round(p.lat),Math.round(p.lon));g.render();};
+   bt.onclick=function(){
+     if(!pick)return;var t=tasks[idx];
+     var dl=Math.abs(pick.lon-t[2]);if(dl>180)dl=360-dl;
+     if(Math.abs(pick.lat-t[1])<=6&&dl<=6){
+       msg.className="msg good";msg.textContent="Treffer!";idx++;
+       if(idx>=tasks.length){bt.disabled=true;g.pick=null;title.textContent="Alle Orte gefunden!";g.render();c.done();return;}
+       setTask();
+     }else{c.error();msg.className="msg bad";msg.textContent="Leider daneben. Prüfe Nord/Süd und Ost/West und versuche es nochmal.";}
+   };
+   b.appendChild(title);b.appendChild(g.el);b.appendChild(info);b.appendChild(bt);b.appendChild(msg);
+   setTask();
+  }}
+ ,{title:"Material auswerten",teaser:"Auffälligkeiten in Diagrammen und Karten erkennen.",hint:"Auswerten heißt: Was zeigt das Material (Beschreibung)? Was ist auffällig (Maximum, Minimum, Entwicklung, Unterschiede)? Was folgt daraus (Deutung)? Immer mit Zahlen und Fachbegriffen arbeiten.",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"Nimm die Materialien aus deinem Schulbuch (Seite 60 und 61) zum Mandelanbau in Kalifornien (Klimadiagramm Sacramento, Dürre-Index, Profil durch Zentralkalifornien, Karte). Entscheide, ob die Aussagen zutreffen."));
+   var tf=["trifft zu","trifft nicht zu"];
+   selectTask(b,[
+    ["Klimadiagramm Sacramento: Die humiden Monate liegen im Winter, im Sommer liegt eine ausgeprägte aride Zeit.",tf,0],
+    ["Klimadiagramm Sacramento: Die Niederschläge fallen gleichmäßig über das Jahr verteilt.",tf,1],
+    ["Klimadiagramm Sacramento: Die Temperaturkurve hat ihr Maximum im Hochsommer (Juli/August).",tf,0],
+    ["Dürre-Index (PDSI): Negative Werte bedeuten, dass es trockener als normal ist.",tf,0],
+    ["Dürre-Index (PDSI): In den letzten Jahren treten die negativen Werte eher häufiger und stärker auf als früher (siehe Diagramm im Buch).",tf,0],
+    ["Profil durch Zentralkalifornien: Westlich der Sierra Nevada, im Central Valley, fallen deutlich geringere Niederschläge als im Gebirge.",tf,0],
+    ["Profil durch Zentralkalifornien: Die Station Independence östlich der Sierra Nevada hat mehr Niederschlag als die Gebirgsstation Giant Forest.",tf,1],
+    ["Profil: Das Küstengebirge wirkt als Regenschatten für das Central Valley.",tf,0],
+    ["Karte: Der Mandelanbau konzentriert sich auf das Central Valley, nicht auf die Küste.",tf,0],
+    ["Material zum Klimawandel: Die Schneedecke der Sierra Nevada nimmt ab, das Schmelzwasser kommt früher im Jahr.",tf,0]
+   ],"Aussagen prüfen","Sehr gut ausgewertet!",c.done,c.error);
+   var sub=el("div",{class:"sub"});
+   sub.appendChild(el("h3",null,"Merkschema Materialauswertung"));
+   sub.appendChild(el("p",null,"<b>1. Einordnen:</b> Art des Materials, Thema, Ort, Zeitraum, Quelle.<br><b>2. Beschreiben:</b> Maximum, Minimum, Verlauf, Unterschiede, mit Zahlen und Einheiten.<br><b>3. Auffälligkeiten:</b> Was sticht heraus? Gibt es Ausreißer oder einen Trend?<br><b>4. Deuten:</b> Warum ist das so? (Klima, Relief, Wasser, Mensch)<br><b>5. Bezug zur Aufgabe:</b> Was bedeutet das für die Fragestellung?"));
+   b.appendChild(sub);
+  }}
+
+ ,{title:"Zonen im Überblick",teaser:"Stationen, Klima, Anbau und Grenzen der Landschaftszonen.",hint:"Nutze die Übersichtsseite „Das Wichtigste in Kürze“ in deinem Schulbuch: Von den Polen zum Äquator nehmen Temperatur und Niederschlag zu (mit Ausnahme der Trockengebiete), die Jahreszeiten werden schwächer.",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"<b>Schlage dein Schulbuch auf Seite 58 und 59 auf</b> (Das Wichtigste in Kürze). Die Aufgaben beziehen sich auf die Modelldarstellung der Landschaftszonen dort (Stationen, Klimadiagramme, Vegetation, Anbau)."));
+   var z=["Polare Zone (Tundra)","Subpolare Zone (Taiga)","Gemäßigte Zone (Laub- und Mischwald)","Gemäßigte Zone (Steppe)","Subtropen (Hartlaubzone)","Wüste und Halbwüste","Savannen","Tropischer Regenwald"];
+   selectTask(b,[
+    ["Barrow (Alaska/USA): Jahresmitteltemperatur unter −10 °C, unter 300 mm Niederschlag",z,0],
+    ["Kirensk (Russland): lange Winter, Nadelwald mit Lärchen und Fichten",z,1],
+    ["Essen (Deutschland): milde Winter, warme Sommer, Niederschlag über 600 mm",z,2],
+    ["Karaganda (Kasachstan): kalte Winter, heiße Sommer, unter 600 mm, bis übermannshohes Gras",z,3],
+    ["Athen (Griechenland): trockene Sommer, mediterrane Hartlaubvegetation",z,4],
+    ["Walfischbucht (Namibia): unter 250 mm, nur kurze Regenzeit, Dünen",z,5],
+    ["Bamako (Mali): Regenzeit und Trockenzeit, Gräser mit Baumgruppen",z,6],
+    ["Padang (Indonesien): über 1 500 mm, ganzjährig feucht, über 24 °C, keine Jahreszeiten",z,7]
+   ],"Stationen prüfen","Alle Stationen richtig zugeordnet!",function(){nxt();},c.error);
+   var part2=el("div",{class:"sub hidden"});b.appendChild(part2);
+   function nxt(){part2.classList.remove("hidden");}
+   part2.appendChild(el("h3",null,"Teil 2: Nutzung und Grenzen"));
+   var g=["Permafrost, geringe pflanzliche Primärproduktion","Kurze Vegetationsperiode, eingeschränkte Nährstoffverfügbarkeit","Wassermangel (Trockengrenze des Regenfeldbaus)","Eingeschränkte Nährstoffverfügbarkeit trotz hoher Niederschläge"];
+   selectTask(part2,[
+    ["Was begrenzt die Landwirtschaft in der Polarzone?",g,0],
+    ["Was begrenzt die Landwirtschaft in der Wüste und Halbwüste?",g,2],
+    ["Was schränkt die Landwirtschaft im tropischen Regenwald ein?",g,3],
+    ["Welche Anbauprodukte passen zur Hartlaubzone (Subtropen)?",["Rentiere","Wein, Oliven, Zitrusfrüchte","Maniok, Bananen, Kakao, Kaffee"],1],
+    ["Welche Anbauprodukte passen zum tropischen Regenwald?",["Roggen und Kartoffeln","Wein und Oliven","Maniok, Bananen, Kakao, Kaffee, Zuckerrohr"],2],
+    ["Welche Grenze der Ökumene begrenzt die Besiedlung der Polarzone?",["Kältegrenze","Trockengrenze","Höhengrenze"],0],
+    ["Welche Grenze der Ökumene begrenzt die Besiedlung der Wüste?",["Kältegrenze","Trockengrenze","Höhengrenze"],1]
+   ],"Nutzung prüfen","Stark! Du kannst Klima, Vegetation und Nutzung verknüpfen.",c.done,c.error);
+  }}
+
+ ,{title:"Klausur: Mandelanbau",teaser:"Schulbuch S. 60/61: drei Aufgaben mit Hilfen und Erwartungshorizont.",hint:"Gehe die Aufgaben der Reihe nach durch. Nutze die Hilfen erst, wenn du nicht weiterkommst. Zuerst selbst schreiben, dann den Erwartungshorizont öffnen.",
+  build:function(b,c){
+   b.appendChild(el("p",{class:"story"},"Thema: Mandelanbau in Kalifornien als Beispiel für die Subtropen. <b>Schlage dein Schulbuch auf Seite 60 und 61 auf</b> (Klausurtraining). Du brauchst die Materialien M1 bis M10: Atlaskarte, Mandelbauern (M2), Klimadiagramm Sacramento (M3), Mandelbaum (M4), Dürre-Index (M5, M6), Karte Mandelanbau (M7), Profil durch Zentralkalifornien (M8), Trockenheit (M9) und Klimawandel (M10). Schreibe jede Antwort ins Heft und rechne dann mit dem Erwartungshorizont nach."));
+   var tasks=[
+    {t:"Aufgabe 1 (AFB I/II): Beschreibe die Ansprüche des Mandelbaums an das Klima und prüfe die Eignung von Sacramento für den Mandelanbau. (Material: M3, M4)",
+     helps:["<b>Operator:</b> „Beschreiben“ heißt, Merkmale sachlich und in Fachsprache wiederzugeben. „Prüfen“ heißt, an Kriterien zu messen und ein Fazit zu ziehen.","<b>Aufbau:</b> 1. Ansprüche des Mandelbaums (M4: Temperatur, Winterkälte, Frost, Trockenheit). 2. Klimadiagramm von Sacramento (M3) auswerten: Jahresmitteltemperatur, Jahresniederschlag, humide und aride Monate. 3. Vergleich und Fazit.","<b>Satzanfänge:</b> „Der Mandelbaum benötigt …“ · „Das Klimadiagramm zeigt für Sacramento …“ · „Damit ist der Standort … geeignet, weil …“"],
+     ck:[["Einordnung: Der Mandelbaum ist ein typisches Gewächs der winterfeuchten Subtropen, wächst aber auch in warmen Regionen der gemäßigten Zone",1],["Temperatur: Optimal sind etwa 25 bis 30 °C; unter 15 °C und über 35 °C verlangsamt sich das Wachstum",2],["Kältebedarf: Für Blüteninduktion und Fruchtansatz sind etwa 200 bis 400 Stunden mit Temperaturen unter 7 °C nötig",1],["Frost: Der Baum ist winterhart, aber Fröste während der Blüte können zu Missernten führen",1],["Trockenheit: An heiße Sommer angepasst, bei zu trockenen Bedingungen aber Ertragsrückgänge, daher im kommerziellen Anbau Bewässerung",1],["M3 ausgewertet: Station, Lage (38°31′ N, 8 m ü. M.), Jahresmitteltemperatur etwa 16,5 °C, Jahresniederschlag etwa 420 mm (Werte im Diagramm ablesen)",2],["M3 Verlauf: Temperaturmaximum im Sommer (Juli/August), Niederschläge im Winter (humid), im Sommer ausgeprägte aride Zeit",1],["Fazit: Sommertemperaturen liegen im Wachstumsoptimum, Winterkälte für die Blüte ist vorhanden, der Standort ist gut geeignet, aber die sommerliche Trockenheit macht Bewässerung nötig",2]],
+     muster:"Der Mandelbaum ist ein Gewächs der winterfeuchten Subtropen, wächst aber auch in warmen Regionen der gemäßigten Zone. Er wächst am besten bei 25 bis 30 °C, unter 15 °C und über 35 °C verlangsamt sich das Wachstum. Für die Blüte braucht er 200 bis 400 Stunden unter 7 °C. Er ist winterhart, Fröste in der Blüte können aber zu Missernten führen. Das Klimadiagramm von Sacramento (38°31′ N, 8 m ü. M.) zeigt eine Jahresmitteltemperatur von etwa 16,5 °C und einen Jahresniederschlag von etwa 420 mm. Der Sommer ist warm bis heiß und trocken (arid), der Winter mild und feucht (humid). Damit stimmen Sommerwärme und Winterkälte mit den Ansprüchen überein. Sacramento ist klimatisch gut geeignet, im Sommer ist aber Bewässerung nötig."},
+    {t:"Aufgabe 2 (AFB II): Erläutere die Verbreitung des Mandelanbaus unter Berücksichtigung der Wasserverfügbarkeit und der Bewässerungsmöglichkeiten. (Material: M2, M4, M7, M8)",
+     helps:["<b>Operator:</b> „Erläutern“ heißt, einen Sachverhalt mit Gründen und Beispielen nachvollziehbar zu machen (nicht nur nennen).","<b>Aufbau:</b> 1. Wo liegt der Anbau (M7)? 2. Warum dort: Relief und Niederschlag (M8: Regenschatten, Sierra Nevada, Schnee). 3. Bewässerung und Wasserbedarf (M2, M4). 4. Zusammenfassung.","<b>Satzanfänge:</b> „Die Karte zeigt, dass der Anbau vor allem … liegt.“ · „Das liegt daran, dass …“ · „Deshalb ist … notwendig.“"],
+     ck:[["M7: Der Anbau konzentriert sich auf das Central Valley (vor allem das mittlere und südliche Tal, zum Beispiel Counties wie Fresno, Kern, Stanislaus), nicht auf die Küste und nicht auf das Gebirge",2],["M8: Das Küstengebirge fängt Niederschläge ab (Luv), das Central Valley liegt im Regenschatten und ist trocken (Stationen wie Fresno oder Mendota mit geringem Niederschlag)",2],["M8: In der Sierra Nevada steigen die Luftmassen auf, es fällt viel Regen und Schnee (Giant Forest), östlich davon (Independence) ist es wieder trocken",1],["Wasserquelle: Im Sommer fällt im Tal kaum Regen, das Wasser stammt aus der Schneeschmelze der Sierra Nevada, geleitet über Flüsse, Kanäle und Stauseen, ergänzt durch Grundwasser",2],["Wasserbedarf: etwa 13 000 Liter pro Kilogramm Mandeln, mehr als 15 % des verfügbaren Wassers Kaliforniens (Landwirtschaft insgesamt etwa 80 %)",1],["Zusammenfassende Erklärung: Mandeln werden dort angebaut, wo Wärme, Winterkälte, geeignete Böden und gesicherte Bewässerung zusammentreffen",1]],
+     muster:"Der Mandelanbau konzentriert sich nach M7 auf das Central Valley, vor allem im mittleren und südlichen Teil. Das Tal liegt zwischen dem Küstengebirge und der Sierra Nevada. Nach M8 regnen sich die Wolken am Küstengebirge ab, sodass das Central Valley im Regenschatten liegt und nur wenig Niederschlag erhält. Viel Niederschlag fällt dagegen in der Sierra Nevada, vor allem als Schnee. Im Sommer ist das Tal trocken, deshalb ist Bewässerung nötig. Das Wasser stammt aus der Schneeschmelze der Sierra Nevada und wird über Flüsse und Kanäle ins Tal geleitet, dazu kommt Grundwasser. Mandelbäume brauchen etwa 13 000 Liter Wasser pro Kilogramm. Der Anbau liegt also dort, wo das Klima passt und Wasser durch Bewässerung verfügbar gemacht werden kann."},
+    {t:"Aufgabe 3 (AFB III): Beurteile mögliche Zukunftsaussichten für den Mandelanbau in Kalifornien, auch vor dem Hintergrund des Klimawandels. (Material: M2, M5, M6, M9, M10)",
+     helps:["<b>Operator:</b> „Beurteilen“ heißt, Pro und Contra abzuwägen und zu einem begründeten Urteil zu kommen, das du selbst formulierst.","<b>Aufbau:</b> 1. Argumente für eine Zukunft. 2. Argumente gegen eine Zukunft (M5/M6 Dürre-Index, M10 Schneedecke und Hitzewellen, M9 Trockenheit). 3. Abwägen und eigenes Urteil mit Begründung, zum Beispiel mit Anpassungsmöglichkeiten.","<b>Satzanfänge:</b> „Für den Mandelanbau spricht …“ · „Dagegen spricht …“ · „Insgesamt halte ich … für …, weil …“"],
+     ck:[["Pro: Wirtschaftliche Bedeutung und Struktur: über 7 600 Betriebe, fast 90 % Familienbetriebe, über 90 % der Mandeln werden im Land verarbeitet (M2)",1],["Pro: Der Baum ist an heiße Sommer angepasst; Anpassung durch wassersparende Bewässerung und Technik denkbar",1],["Contra (M5/M6): Der Dürre-Index zeigt wiederkehrende Dürrejahre, in jüngster Zeit längere und stärkere Trockenphasen (negative Werte, zum Teil schwere bis extreme Dürre)",1],["Contra (M10): Die Schneedecke der Sierra Nevada ging zwischen 1955 und 2023 um etwa 18 % zurück, die Schneesaison ist etwa 15 Tage kürzer",1],["Contra (M10): Die Wasserspeicher sind auf die Schneeschmelze ausgelegt, höhere Temperaturen führen zu früherer und schnellerer Schmelze, das Wasser fehlt im Sommer",1],["Contra (M10): Hitzewellen werden häufiger und intensiver (Hitzestress über 35 °C), wärmere Winter können den Kältebedarf für die Blüte gefährden",1],["Konkurrenz um Wasser: Landwirtschaft nutzt etwa 80 %, Haushalte und Industrie etwa 20 %, Mandeln brauchen viel Wasser (Konfliktpotenzial, Kritik am Wasserverbrauch)",1],["Abwägung der Argumente (Gewichtung: Welche Argumente wiegen schwerer und warum?)",1],["Eigenes begründetes Urteil (zum Beispiel: eingeschränkte Zukunft, nur mit Anpassung)",1],["Fachsprache und Materialbezug (M-Nummern, Zahlen) im Urteil genutzt",1]],
+     muster:"Für den Mandelanbau spricht seine wirtschaftliche Bedeutung: Es gibt über 7 600 Betriebe, meist Familienbetriebe, und über 90 % der Mandeln werden im Land verarbeitet (M2). Der Baum ist an heiße Sommer angepasst, und wassersparende Bewässerung kann den Verbrauch senken. Dagegen sprechen die zunehmenden Dürren (M5, M6): Der Dürre-Index zeigt in jüngster Zeit längere Trockenphasen. Nach M10 ist die Schneedecke der Sierra Nevada zwischen 1955 und 2023 um etwa 18 % zurückgegangen, die Schneesaison ist etwa 15 Tage kürzer. Weil die Speicher auf die Schneeschmelze ausgelegt sind und der Schnee früher schmilzt, fehlt im Sommer Wasser. Hitzewellen belasten die Bäume zusätzlich. Dazu konkurrieren Landwirtschaft (etwa 80 % des Wassers), Haushalte und Industrie um das knappe Wasser. Insgesamt halte ich die Zukunftsaussichten für eingeschränkt: Der Anbau bleibt nur mit Anpassung (sparsame Bewässerung, weniger Fläche, andere Kulturen) möglich, weil das Wasserproblem mit dem Klimawandel wächst."}
+   ];
+   var totalP=0,gotP=0,ndone=0;
+   var summary=el("div",{class:"task hidden",style:"margin-top:14px"});
+   tasks.forEach(function(tk,ti){
+    var sec=el("div",{class:ti?"sub":""});
+    sec.appendChild(el("p",null,"<b>"+tk.t+"</b>"));
+    var hl=el("div");var shown=0;
+    var hb=el("button",{class:"btn ghost",type:"button"},"💡 Hilfe 1 anzeigen");
+    hb.onclick=function(){hl.appendChild(el("div",{class:"hint"},tk.helps[shown]));shown++;hb.textContent=shown<tk.helps.length?"💡 Hilfe "+(shown+1)+" anzeigen":"Keine weiteren Hilfen";if(shown>=tk.helps.length)hb.disabled=true;c.error();};
+    sec.appendChild(hb);sec.appendChild(hl);
+    sec.appendChild(el("textarea",{"aria-label":"Deine Antwort zu Aufgabe "+(ti+1),style:"margin-top:10px"}));
+    var mx=tk.ck.reduce(function(a,q){return a+q[1];},0);totalP+=mx;
+    var rb=el("button",{class:"btn alt",type:"button",style:"margin-top:10px"},"Erwartungshorizont anzeigen");
+    var eh=el("div",{class:"hint hidden"});var out=el("div",{class:"task hidden",style:"margin-top:10px"});
+    rb.onclick=function(){
+      rb.disabled=true;eh.classList.remove("hidden");eh.appendChild(el("p",null,"<b>Hake an, was in deiner Antwort stand (insgesamt "+mx+" Punkte):</b>"));
+      var bx=[];
+      tk.ck.forEach(function(q){var l=el("label",{class:"ck"});var i=el("input",{type:"checkbox"});bx.push(i);l.appendChild(i);l.appendChild(el("span",null,q[0]+" <i>("+q[1]+" P.)</i>"));eh.appendChild(l);});
+      var cb=el("button",{class:"btn",type:"button"},"Punkte auswerten");
+      cb.onclick=function(){
+        var p=0;bx.forEach(function(i,k){if(i.checked)p+=tk.ck[k][1];});
+        out.classList.remove("hidden");out.textContent="Aufgabe "+(ti+1)+": "+p+" von "+mx+" Punkten.";cb.disabled=true;bx.forEach(function(i){i.disabled=true;});
+        gotP+=p;ndone++;
+        if(ndone===tasks.length){
+          summary.classList.remove("hidden");
+          var pc=Math.round(gotP/totalP*100);
+          summary.textContent="Gesamt: "+gotP+" von "+totalP+" Punkten ("+pc+" %).";
+          c.setErrors(pc>=80?0:(pc>=50?1:3));c.done();
+        }
+      };
+      eh.appendChild(cb);eh.appendChild(out);
+      var md=el("details",{style:"margin-top:12px"});md.appendChild(el("summary",{style:"cursor:pointer;font-weight:700"},"Beispiel für eine vollständige Antwort"));md.appendChild(el("p",null,tk.muster));eh.appendChild(md);
+    };
+    sec.appendChild(rb);sec.appendChild(eh);b.appendChild(sec);
+   });
+   b.appendChild(summary);
+   c.ownErrors=true;
+  }}
+];
+
+function showHome(){
+  window.scrollTo(0,0);app.innerHTML="";
+  app.appendChild(el("section",{class:"hero"},'<div class="k">ERDKUNDE · EINFÜHRUNGSPHASE NRW</div><h2>Selbsttest: Ökumene, Anökumene und Landschaftszonen</h2><p>Neun Level zur Vorbereitung auf die Klausur. Ohne Atlas, mit Sofort-Rückmeldung und bis zu drei Sternen pro Level. Dein Fortschritt bleibt auf diesem Gerät gespeichert.</p>'));
+  var g=el("div",{class:"grid"});
+  levels.forEach(function(lv,i){
+    var d=state.done[i]!=null;
+    var b=el("button",{class:"lv"+(d?" done":""),type:"button"},'<span class="no">'+(i+1)+'</span><h3>'+lv.title+'</h3><p>'+lv.teaser+'</p><div class="st">'+starStr(d?state.done[i]:0)+'</div>');
+    b.onclick=function(){showLevel(i);};g.appendChild(b);
+  });
+  app.appendChild(g);
+  if(Object.keys(state.done).length===levels.length)app.appendChild(el("div",{class:"card win",style:"margin-top:16px"},'<div class="big">🏆</div><h2 class="t">Klausurfit!</h2><p>'+totalStars()+' von '+(levels.length*3)+' Sternen.</p>'));
+  var r=el("p",{style:"margin-top:20px"});var rb=el("button",{class:"btn ghost",type:"button"},"Sterne zurücksetzen");
+  rb.onclick=function(){if(confirm("Alle Sterne löschen?")){state={done:{}};save();updTotal();showHome();}};
+  r.appendChild(rb);app.appendChild(r);updTotal();
+}
+function showLevel(i){
+  window.scrollTo(0,0);app.innerHTML="";globes.length=0;
+  var lv=levels[i],errors=0;
+  var back=el("button",{class:"btn ghost"},"← Zur Übersicht");back.onclick=showHome;
+  var card=el("div",{class:"card",style:"margin-top:12px"},'<h2 class="t">Level '+(i+1)+': '+lv.title+'</h2>');
+  var box=el("div");card.appendChild(box);var res=el("div");
+  var c={ownErrors:false,
+    error:function(){if(!c.ownErrors)errors++;},
+    setErrors:function(n){errors=n;},
+    done:function(){
+      var st=starsFor(errors),prev=state.done[i];if(prev==null||st>prev){state.done[i]=st;save();}updTotal();
+      res.innerHTML='<div class="task" style="margin-top:14px">Level geschafft: <span style="letter-spacing:3px">'+starStr(st)+'</span> ('+errors+' Fehlversuch'+(errors===1?'':'e')+')</div>';
+      var nx=el("button",{class:"btn alt"},i<levels.length-1?"Nächstes Level →":"Zur Übersicht");
+      nx.onclick=function(){if(i<levels.length-1)showLevel(i+1);else showHome();};res.appendChild(nx);
+    }};
+  lv.build(box,c);card.appendChild(res);
+  var hb=el("button",{class:"btn ghost",style:"margin-top:12px"},"💡 Tipp");var hx=el("div",{class:"hint hidden"},lv.hint);
+  hb.onclick=function(){hx.classList.remove("hidden");hb.disabled=true;};
+  card.appendChild(hb);card.appendChild(hx);app.appendChild(back);app.appendChild(card);
+  globes.forEach(function(g){g.render();});
+}
+updTotal();var hm=/^#l(\d)$/.exec(location.hash||"");if(hm&&levels[+hm[1]-1])showLevel(+hm[1]-1);else showHome();
+})();
+</script>
+</body>
+</html>
